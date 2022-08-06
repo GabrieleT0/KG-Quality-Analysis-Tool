@@ -1,0 +1,514 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="result.css">
+        <link rel="icon" href="img/fav.png">
+        <title>KG - Quality analysis tool</title>
+    </head>
+    <body>
+        <script type="text/javascript" src="result.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="http://code.highcharts.com/modules/offline-exporting.js"></script>
+    <script src="http://code.highcharts.com/modules/export-data.js"></script>
+    <script src="http://code.highcharts.com/modules/data.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/networkgraph.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+    
+    <div class="row">
+        <div class="left">
+          <h2 id="titleMen">KGs analyzed</h2>
+          <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
+          <ul id="specialBtn">
+            <li><a href='index.html' id="linkInd"><button type="button" id='index'>Analyzes new KGs </button></a></li>
+            <li><a href='compare.html' id="linkS"><button type="button" id='compare'>Compare KGs </button></a></li>
+          </ul>
+            <div id="wrapMenu" style="display:inline-block;">
+                <ul id="myMenu">
+                </ul>
+            </div>
+        </div>
+
+        <div class="right" style="width: 30%;">
+        <div class = 'wrapper' style="text-align: center; " >
+            <div id = 'metrics' style="align-items: center;">
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="score" name="metric" value="Score" checked><label for="score">Score</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="believ" name="metric" value="Believability" checked><label for="believ">Believability</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="av" name="metric" value="Availability" ><label for="av" >Availability</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="lic" name="metric" value="Licensing"> <label for="lic">Licensing</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="int" name="metric" value="Interlinking"> <label for="int">Interlinking-Reputation</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="sec" name="metric" value="Security"> <label for="sec">Security</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="perf" name="metric" value="Performance"> <label for="perf">Performance</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="acc" name="metric" value="Accuracy"> <label for="acc">Accuracy</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="cons" name="metric" value="Consistency"> <label for="cons">Consistency</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="verif" name="metric" value="Verifiability"> <label for="verif">Verifiability</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="vol" name="metric" value="Volatility"> <label for="vol">Volatility</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="curr" name="metric" value="Currency"> <label for="curr">Currency</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="con" name="metric" value="Conciseness"> <label for="con">Conciseness</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="com" name="metric" value="Completeness"> <label for="com">Completeness</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="amount" name="metric" value="Amount"> <label for="amount">Amount of data</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="repConc" name="metric" value="RepresentationalConciseness"> <label for="repConc">Representational conciseness</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="repCons" name="metric" value="RepresentationalConsistency"> <label for="repCons">Representational consistency</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="under" name="metric" value="Understendability"> <label for="under">Understendability</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="interp" name="metric" value="Interpretability"> <label for="interp">Interpretability</label></div>
+                <div class='input-radio'><input type="radio" onclick="passValue(idKG,this);" id="vers" name="metric" value="Versatility"> <label for="vers">Versatility</label></div>
+            </div>
+        </div>
+        <script>
+            var metric = document.querySelector('input[name="metric"]:checked');
+            kgs = localStorage.getItem('kgs')
+            kgs = JSON.parse(kgs)
+            kgs = JSON.parse(kgs)
+            k = Object.keys(kgs)
+            console.log(kgs)
+            var select = document.getElementById("myMenu");
+            for(var i = 0; i<k.length; i++){
+                kg = kgs[k[i]]
+                kgObj = JSON.parse(kg)
+                KGid = kgObj.extra.KGid
+                KGname = kgObj.believability.title
+                console.log(KGid)
+                console.log(KGname)
+                var el = document.createElement("li");
+                var button = document.createElement('button')
+                button.textContent = KGname;
+                button.value = KGid;
+                button.innerHTML = KGname
+                button.id = KGid;
+                button.className = 'KGbutton'
+                button.onclick = function(){
+                    passValue(this.value,metric)
+                }   
+                el.appendChild(button)
+                select.appendChild(el);
+                var label = document.createElement('Label')
+                label.htmlFor = KGid
+                label.appendChild(document.createTextNode(KGid))
+                var br = document.createElement('br')
+            }
+            var select = document.getElementById('myMenu');
+            select.addEventListener("change",function() {
+                var metric = document.querySelector('input[name="metric"]:checked');
+                idKG = this.value
+                passValue(this.value,metric);
+            });
+            const radioButtons = document.getElementById('metrics').querySelectorAll('input[type="radio"][name="metric"]');
+            var select = document.getElementById('myMenu');
+            select.addEventListener("change",function() {
+                idKG = this.value;
+            });
+        </script>
+
+        <div id="containerAv" style="width:100%; float: left; margin-top: 10px; display: none; margin-bottom: 120px;">
+            <table class="center" id="tableSPARQL">
+                <tr>
+                    <th>SPARQL endpoint status</th>
+                    <th>RDF dump status</th>
+                    <th>URIs deferenceability</th>
+                    <th>
+                        <a href="#popupAv" class="wrapHelp" ><img src="img/ask.png" width="43" height="43"/></a>
+                    </th>
+                </tr>
+                <tr>
+                    <td id="statusE"></td>
+                    <td id="statusDump"></td>
+                    <td id="defValue"></td>
+                </tr>
+            </table>
+        </div>
+        <div id="popupAv" class="overlay">
+            <div class="popup">
+                <h2>URIs deferenceability</h2>
+                <a class="close" href="#" style="background-color:#FFFFFF; border-radius: 50%; padding: 0;">&times;</a>
+                <div class="content">
+                    The URIs deferenceability value should be as close to 1 as possible. This test is done based on 5000 triples.
+                </div>
+            </div>
+        </div>
+        <div id="containerLicense"style='display: none;'>
+            <table class='center' id="license">
+                <tr>
+                    <th>License (metadati)</th>
+                    <th id="hmr"></th>
+                    <th id="hhr"></th>
+                </tr>
+                <tr>
+                    <td id="licenseM"></td>
+                    <td id="licenseMR"></td>
+                    <td id="licenseHR"></td>
+                </tr>
+            </table>
+            <script> var m = document.querySelector('input[name="metric"]:checked');</script>
+            <button id='export-btnLic' onclick="exportTableToCSV(idKG+' - licensing.csv','license')"><img src="img/csv-ico.png" width="60" height="60"/></button>
+        </div>
+        <div id="containerBeliev" style='display: none;'> </div>
+        <table id="reliablePr">
+            <tr>
+                <th id="headP">List of trusted providers</th>
+            </tr>
+            <tr>
+                <td>Wikipedia</td>
+            </tr>
+            <tr>
+                <td>Government</td>
+            </tr>
+            <tr>
+                <td>Bioportal</td>
+            </tr>
+            <tr>
+                <td>Bio2RDF</td>
+            </tr>
+            <tr>
+                <td>Academic</td>
+            </tr>
+        </table>
+        <div id="containerTrust"  style="width:50%;"> </div>
+
+        <div id="interlinking" style='display: none; width: 60%; height:70% ;float: left;' ></div>
+        <div id="intPie" style="display: none; width: 40%; float: left;"></div>
+        <div id="wrap-tbInt" style="display: none;">
+        <table id="tableInt" style=" margin-top:80px; ">
+                <tr>
+                    <th>Degree of connection</th>
+                    <th>Clustering coefficient</th>
+                    <th>Centrality</th>
+                    <th>PageRank</th>
+                    <th>
+                        <a href="#popupInter" class="wrapHelp" ><img src="img/ask.png" width="43" height="43"/></a>
+                    </th>
+                </tr>
+                <tr>
+                    <td id="dc"></td>
+                    <td id="ccl"></td>
+                    <td id="cent"></td>
+                    <td id="pr"></td>
+                </tr>
+            </table>
+            <button id='export-btnInt' onclick="exportTableToCSV(idKG+' - interlinking.csv','tableInt')"><img src="img/csv-ico.png" width="60" height="60"/></button>
+            <div id="popupInter" class="overlay">
+                <div class="popup">
+                    <h2>Interlinking</h2>
+                    <a class="close" href="#" style="background-color:#FFFFFF; border-radius: 50%; padding: 0;">&times;</a>
+                    <div class="content">
+                        More links means higher kg quality. <br> PageRank ia a value in the interval [0-10]. <br> Centrality and clustering coefficient are velues in the interval [0-1].<br>
+                        And higher percentage of sameAs chains means higer quality, because a high number of triples is connected with other triples of other kg.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="performance" style="display: none;"></div>
+        <div id="performanceT" style="display:none;"></div>
+    
+        <div id="wrapSec" style="display: none; text-align: center;">
+            <table  id='sec-tb' class="center" style="margin-top:50px;">
+                <tr>
+                    <th>Use HTTPS on the SPARQL endpoint</th>
+                    <th>Requires authentication to do query</th>
+                </tr>
+                <tr>
+                    <td id="https"></td>
+                    <td id="auth"></td>
+                </tr>
+            </table>
+            <button id='export-btnSec' onclick="exportTableToCSV(idKG+' - security.csv','sec-tb')"><img src="img/csv-ico.png" width="60" height="60"/></button>
+        </div>
+
+        <div id="accuracy" style="display: none;"></div>
+        
+        <button id='hiddenB2' type="button" value="Consistency" style='display: none;'>Consistency</button>
+            <script>cons = document.getElementById('hiddenB2')</script>
+        
+        <div id="consistency" style="display: none;"></div>
+            <table id="const-tab" class='center' style="display: none; width: fit-content; text-align: center; margin-top: 20px; margin-bottom: 35px;">
+                <tr> 
+                    <th>Entities as member of disjoint class</th>
+                    <th>Ontology hijacking</th>
+                    <th>
+                        <a href="#popupCons" class="wrapHelp" ><img src="img/ask.png" width="43" height="43"/></a>
+                    </th>
+                </tr>
+                <tr>
+                    <td id="disjValue" style="text-align: center;"></td>
+                    <td id="OHValue" style="text-align: center;"></td>
+                </tr>
+            </table>
+            <div id="popupCons" class="overlay">
+                <div class="popup">
+                    <h2>Consistency</h2>
+                    <a class="close" href="#" style="background-color:#FFFFFF; border-radius: 50%; padding: 0;">&times;</a>
+                    <div class="content">
+                        Ontology Hijacking must be False.
+                    </div>
+                </div>
+            </div>
+        
+        <div id="verifiability" style="display: none; margin-top: 50px; margin-left: 10px; overflow-x:auto; text-align: center;">
+            <table id="tableVer" class="center" height="500px">
+                <tr>
+                    <th id="headVoc"></th>
+                    <th>Authors</th>
+                    <th>Publishers</th>
+                    <th>Contributors</th>
+                    <th>Sources</th>
+                    <th>Signed</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="scrollable" id="vocabs"></div>
+                    </td>
+                    <td>
+                        <div class="scrollable" id="auths"></div>
+                    </td>
+                    <td>
+                        <div class="scrollable" id="pubs"></div>
+                    </td>
+                    <td>
+                        <div class="scrollable" id="contribs"></div>
+                    </td>
+                    <td >
+                        <div class="scrollable" id="sources"></div>
+                    </td>
+                    <td>
+                        <div class="scrollable" id="signed"></div>
+                    </td>
+                </tr>
+            </table>
+           <!-- <button id='export-btnVer' onclick="exportTableToCSV(idKG+' - verifiability.csv','tableVer')"><img src="img/csv-ico.png" width="60" height="60"/></button> -->
+        </div>
+    
+        <div id="volatility" style="display: none;">
+            <table id='vol-tab' class="center">
+                <tr>
+                    <th>Dataset update frequency</th>
+                </tr>
+                <tr>
+                    <td id = 'frequency'></td>
+                </tr>
+            </table>
+        </div>
+    
+        <button id='hiddenBCurr' type="button" value="Currency" style='display: none;'></button>
+        <script>curr = document.getElementById('hiddenBCurr')</script>
+        <div id="currency" style="margin-top: 35px; display: none;">
+            <div id="currTimeline"></div>
+            <div id="wrapTabCurr" style="margin-top: 35px; margin-bottom: 50px;">
+                <table id="curr-tab" class="center">
+                    <tr>
+                        <th>Creation date</th>
+                        <th>Last modification date</th>
+                        <th>Time since last modification (days)</th>
+                        <th>Number of triples updated (during the last update)</th>
+                    </tr>
+                    <tr>
+                        <td id="creation"></td>
+                        <td id="modification"></td>
+                        <td id="lastM"></td>
+                        <td id="updated"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    
+        <div id="conciseness" style="display: none;"></div>
+    
+        <div id="tabC" style="display: none;">
+            <table class="center">
+                <tr>
+                    <th>Number of triples</th>
+                    <th>Number of triples linked</th>
+                    <th>Percentage of triples linked</th>
+                    <th>Interlinking completeness</th>
+                    <th>
+                        <a href="#popupCompl" class="wrapHelp" ><img src="img/ask.png" width="43" height="43"/></a>
+                    </th>
+                </tr>
+                <tr>
+                    <td id="numTriplesComp"></td>
+                    <td id="numTriplesLinked"></td>
+                    <td id="percentageLinked"></td>
+                    <td id="interlinkingC"></td>
+                </tr>
+            </table>
+            <div id="popupCompl" class="overlay">
+                <div class="popup">
+                    <h2>Completeness</h2>
+                    <a class="close" href="#" style="background-color:#FFFFFF; border-radius: 50%; padding: 0;">&times;</a>
+                    <div class="content">
+                        The number of triples connected should be as close as possible to the number of triples. So the interlinking value should be close to 1 and the percentage of triples linked should be close to 100%.
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="amountOfData" style="display: none; margin-top: 45px;"></div>
+    
+        <div id="wrap-repConc" style="display:none;">
+            <div id="lengthS" style="margin-top: 30px;"></div>
+            <div id="lengthP" style="margin-top: 30px;"></div>
+            <div id="lengthO" style="margin-top: 30px; margin-bottom: 50px;"></div>
+            <div id="rdfStructures"></div>
+        </div>
+    
+        <div id="wrap-repCons" style="display: none; margin-top: 50px; margin-left: 10px; overflow-x:auto; text-align: center;">
+            <table id="tab-cons" class="center">
+                <tr>
+                    <th id="numNewV">New vocabularies defined in the dataset</th>
+                    <th id="numNewT">New terms defined in the dataset</th>
+                    <th>
+                        <a href="#popupRepCons" class="wrapHelp" ><img src="img/ask.png" width="43" height="43"/></a>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="newVocabs"></div>
+                    </td>
+                    
+                    <td>
+                        <div id="newTerms"></div>
+                    </td>
+                </tr>
+            </table>
+            <div id="popupRepCons" class="overlay">
+                <div class="popup">
+                    <h2>Representational <br> consistency</h2>
+                    <a class="close" href="#" style="background-color:#FFFFFF; border-radius: 50%; padding: 0;">&times;</a>
+                    <div class="content">
+                        A good KG should use standard vocabularies and standard terms, without redefining new ones.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="wrap-und" style="display: none;">
+            <div id="understendability"></div>
+            <div id="wrapTabUnd" style="margin-top: 50px; margin-left: 10px; overflow-x:auto; text-align: center;">
+                <table class="center" id="tabUnd" height="500px">
+                    <tr>
+                        <th>URI regex</th>
+                        <th>Vocabulary used in the KG</th>
+                        <th>Examples provided</th>
+                        <th>
+                            <a href="#popupUnder" class="wrapHelp" ><img src="img/ask.png" width="43" height="43"/></a>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="scrollable" id="regex"></div>
+                        </td>
+                        <td>
+                            <div class='scrollable' id="vocablurayU"></div>
+                        </td>
+                        <td>
+                            <div class="scrollable" id="example"></div>
+                        </td>
+                    </tr>
+                </table>
+                <div id="popupUnder" class="overlay">
+                    <div class="popup">
+                        <h2>Understendability</h2>
+                        <a class="close" href="#" style="background-color:#FFFFFF; border-radius: 50%; padding: 0;">&times;</a>
+                        <div class="content">
+                            The number of labels should be as close as possible to the number of triples, so have a percentage closer to 100%. <br>
+                            The vocabularies used in the graph should be indicated, as well as the regex of the uri, which helps us to understand what are the entities of the graph.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="wrapInterp" style="display: none;">
+            <div id="interpretability"></div>
+            <div id="wrapRdf" style="margin-top: 35px; margin-bottom: 50px;">
+                <table class="center">
+                    <tr>
+                        <th>Use RDF structures</th>
+                        <th>
+                            <a href="#popupInterp" class="wrapHelp" ><img src="img/ask.png" width="43" height="43"/></a>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td id="rdfInt"></td>
+                    </tr>
+                </table>
+                <div id="popupInterp" class="overlay">
+                    <div class="popup">
+                        <h2>RDF structures</h2>
+                        <a class="close" href="#" style="background-color:#FFFFFF; border-radius: 50%; padding: 0;">&times;</a>
+                        <div class="content">
+                            The use of RDF structure  is discouraged by the W3C.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="wrapVers" style="display: none; overflow-x:auto; text-align: center;">
+            <div id="versTab">
+                <table id="tabVers" class="center" width="100%"height="500px">
+                    <tr>
+                        <th>Serialization formats</th>
+                        <th>Available languages </th>
+                        <th>Link SPARQL endpoint</th>
+                        <th>Link for download as RDF dump</th>
+                        <th>
+                            <div>
+                                <a href="#popupVers" class="wrapHelp" ><img src="img/ask.png" width="43" height="43"/></a>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td >
+                            <div class="scrollable" id="serializations"></div>
+                        </td>
+                        <td>
+                            <div class="scrollable" id="languages"></div>
+                        </td>
+                        <td>
+                            <div class="scrollable" id="linkSPARQL"></div>
+                        </td>
+                        <td>
+                            <div class="scrollable" id="linkRDF"></div>
+                        </td>
+                    </tr>
+                </table>
+                <div id="popupVers" class="overlay">
+                    <div class="popup">
+                        <h2>Versatility</h2>
+                        <a class="close" href="#" style="background-color:#FFFFFF; border-radius: 50%; padding: 0;">&times;</a>
+                        <div class="content">
+                            A good KG should be able to be serialized in different formats such as JSON or XML. To have a high degree of versatility it is also advisable to support more than one language.
+                        </div>
+                    </div>
+                </div>
+                <button id='export-btnVers' onclick="exportTableToCSV(idKG+' - versatility.csv','tabVers')"><img src="img/csv-ico.png" width="60" height="60"/></button>
+            </div>
+        </div>
+
+        <div id="scoreCont" >
+            <div id="scoreChart" ></div>
+        </div>
+    
+        <footer>
+            <img src="img/logo.png" width="110" height="70" style="margin-bottom: 15px;"/>
+            <p id="txtFooter">Gabriele Tuozzo, Maria Angela Pellegrino <br> gabrieletuozzo@gmail.com</p>
+        </footer>
+    </div>
+    </div>
+    </body>
+    </html>
+    </body>
+</html>
