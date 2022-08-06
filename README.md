@@ -1,2 +1,2 @@
 # KG-Quality-Analysis-Tool
-Tool for analyzing the quality of kg
+Tool that allows the user to insert the Knowledge Graph to be analyzed, perform the analysis and display the results in the form of graphs.
