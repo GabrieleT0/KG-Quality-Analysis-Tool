@@ -31,7 +31,7 @@ function test(){
         }
     });
     
-    $.post("https://193.205.161.53:5000/testServer",{
+    $.post("https://damp-chamber-92946.herokuapp.com//testServer",{
         javascript_data: JSON.stringify(id),
         javascript_data2: JSON.stringify(keyword),
         },
