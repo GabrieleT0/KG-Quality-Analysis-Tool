@@ -31,7 +31,7 @@ function test(){
         }
     });
     
-    $.post("https://damp-chamber-92946.herokuapp.com//testServer",{
+    $.post("http://kg-quality-analysis-tool.store/testServer",{
         javascript_data: JSON.stringify(id),
         javascript_data2: JSON.stringify(keyword),
         },
