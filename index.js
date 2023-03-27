@@ -31,7 +31,7 @@ function test(){
         }
     });
     
-    $.post("http://kg-quality-analysis-tool.store/testServer",{
+    $.post("https://kg-quality-analysis-tool.store/testServer",{
         javascript_data: JSON.stringify(id),
         javascript_data2: JSON.stringify(keyword),
         },
